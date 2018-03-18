@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Etch-a-Sketch Project</title>
+  <link rel="stylesheet" href="./etch_a_sketch_style.css" />
+</head>
+<body>
+  <div id="container"></div>
+<script>
+//function gride size
+  var gridSize = function() {
+    console.log("gridSize of 16");
+    return(16);
+  }
+//function css grid box width attribute
+  var makeWidth = function(x) {
+    let width = x / 100;
+    document.getElementsByClassName('grid').style.width = "0.16%";
+    return console.log("width: " + width);
+  }
+//function css grid box height attribute
+  var makeHeight = function(x) {
+    let height = x / 100;
+    document.getElementsByClassName('grid').style.height = 0.16;
+    return console.log("height: " + height);
+  }
+//function create 16 by 16 div grid
+  var createGrid = function(x) {
+    let size =  x * x;
+    for(y = 0; y < size; y++) {
+      var createDiv = document.createElement('div');
+      createDiv.classList.add('grid');
+      document.getElementById('container').appendChild(createDiv);
+      console.log("created a div");
+  }
+  }
+//run the program
+  createGrid(gridSize());
+  makeWidth(gridSize());
+  makeHeight(gridSize());
+</script>
+</body>
+</html>
