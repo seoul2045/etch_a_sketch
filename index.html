@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
@@ -13,17 +13,24 @@
     console.log("gridSize of 16");
     return(16);
   }
-//function css grid box width attribute
+//function css grid box create` width attribute
   var makeWidth = function(x) {
     let width = x / 100;
-    document.getElementsByClassName('grid').style.width = "0.16%";
     return console.log("width: " + width);
   }
-//function css grid box height attribute
+//function css grid box creat height attribute
   var makeHeight = function(x) {
     let height = x / 100;
-    document.getElementsByClassName('grid').style.height = 0.16;
     return console.log("height: " + height);
+  }
+//function assign grid box height and width to array object
+  var assignGridSize = function() {
+    let x = document.getElementsByClassName('grid'); //nodeList
+    for(y = 0; y < x.length; y++) {
+      document.getElementsByClassName('grid')[y].style.width = "6.25%";
+      document.getElementsByClassName('grid')[y].style.height = "6.25%";
+      console.log('assigned grid size value');
+    }
   }
 //function create 16 by 16 div grid
   var createGrid = function(x) {
@@ -32,13 +39,37 @@
       var createDiv = document.createElement('div');
       createDiv.classList.add('grid');
       document.getElementById('container').appendChild(createDiv);
-      console.log("created a div");
+      console.log("created div class='grid'");
+    }
   }
+  //function add event listeners to all grid box divs
+    var addGridListeners = function(x) {
+      let size = x * x;
+      for(y = 0; y < size; y++) {
+        document.getElementsByClassName('grid')[y].dataset.gridIndex = y; //add nodeList index to div grid as a data attribute
+        document.getElementsByClassName('grid')[y].addEventListener('mouseover', function(e) {
+          let c = e.currentTarget.dataset.gridIndex;
+          console.log(c + ' is the gridIndex');
+          document.getElementsByClassName('grid')[c].style.backgroundColor = "white";
+
+        });
+      }
   }
+  //function change grid color on mouseover
+    var changeColor = function(x){
+      if (x != undefined) { //after the last div grid box, a value of undefined is being passed
+        let y = x;
+      }
+      console.log('addEventListener: ' + y);
+      document.getElementsByClassName('grid')[0].style.backgroundColor = "white";
+      }
 //run the program
   createGrid(gridSize());
   makeWidth(gridSize());
   makeHeight(gridSize());
+  assignGridSize();
+  addGridListeners(gridSize());
+//  changeColor();
 </script>
 </body>
 </html>
