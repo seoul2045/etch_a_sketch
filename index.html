@@ -6,30 +6,32 @@
   <link rel="stylesheet" href="./etch_a_sketch_style.css" />
 </head>
 <body>
-  <div id="container"></div>
+  <button id='clearButton'>Clear Grid</button>
+  <div id="flex-container"></div>
 <script>
 //function gride size
   var gridSize = function() {
-    console.log("gridSize of 16");
-    return(16);
+//    let size = prompt('Enter grid size: ');
+    return(10);
   }
 //function css grid box create` width attribute
   var makeWidth = function(x) {
-    let width = x / 100;
-    return console.log("width: " + width);
+    let width = (100 / x) + '%';
+    console.log("width: " + width);
+    return width;
   }
 //function css grid box creat height attribute
   var makeHeight = function(x) {
-    let height = x / 100;
-    return console.log("height: " + height);
+    let height = (100 / x) + '%';
+    console.log("height: " + height);
+    return height;
   }
 //function assign grid box height and width to array object
   var assignGridSize = function() {
     let x = document.getElementsByClassName('grid'); //nodeList
     for(y = 0; y < x.length; y++) {
-      document.getElementsByClassName('grid')[y].style.width = "6.25%";
-      document.getElementsByClassName('grid')[y].style.height = "6.25%";
-      console.log('assigned grid size value');
+      document.getElementsByClassName('grid')[y].style.width = makeWidth(gridSize());
+      document.getElementsByClassName('grid')[y].style.height = makeHeight(gridSize());
     }
   }
 //function create 16 by 16 div grid
@@ -38,7 +40,7 @@
     for(y = 0; y < size; y++) {
       var createDiv = document.createElement('div');
       createDiv.classList.add('grid');
-      document.getElementById('container').appendChild(createDiv);
+      document.getElementById('flex-container').appendChild(createDiv);
       console.log("created div class='grid'");
     }
   }
@@ -48,25 +50,19 @@
       for(y = 0; y < size; y++) {
         document.getElementsByClassName('grid')[y].dataset.gridIndex = y; //add nodeList index to div grid as a data attribute
         document.getElementsByClassName('grid')[y].addEventListener('mouseover', function(e) {
-          let c = e.currentTarget.dataset.gridIndex;
-          console.log(c + ' is the gridIndex');
-          document.getElementsByClassName('grid')[c].style.backgroundColor = "white";
-
-        });
-      }
-  }
+          changeColor(e); //pass mouseover event details
+      })}
+    }
   //function change grid color on mouseover
-    var changeColor = function(x){
-      if (x != undefined) { //after the last div grid box, a value of undefined is being passed
-        let y = x;
-      }
-      console.log('addEventListener: ' + y);
-      document.getElementsByClassName('grid')[0].style.backgroundColor = "white";
-      }
+    var changeColor = function(e) {
+      let c = e.currentTarget.dataset.gridIndex;
+      console.log(c + ' is the gridIndex');
+      document.getElementsByClassName('grid')[c].style.backgroundColor = "grey";
+    }
 //run the program
   createGrid(gridSize());
-  makeWidth(gridSize());
-  makeHeight(gridSize());
+//  makeWidth(gridSize());
+//  makeHeight(gridSize());
   assignGridSize();
   addGridListeners(gridSize());
 //  changeColor();

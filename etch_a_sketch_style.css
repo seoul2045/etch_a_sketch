@@ -1,19 +1,37 @@
 body,html {
-  font-size: 10px;
-  margin: 0;
-  padding: 0;
   font-family: sans-serif;
   color: white;
   background-color: black;
 }
 
-#container {
-  box-sizing: border-box;
-  margin-top: 50px;
-  width: 600px;
-  height: 600px;
+#clearButton {
+  margin-top: 25px;
+  margin-left: 30%;
+  width: 150px;
+
+}
+
+#flex-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 25px auto;
+  width: 500px;
+  height: 500px;
   border: 1px solid red;
-  margin: auto;
+
+}
+
+#flex-container > .grid {
+  box-sizing: border-box;
+  border: 1px solid white;
+/*
+#container {
+  margin: 0 auto;
+  width: 500px;
+  height: 500px;
+  margin-top: 50px;
+  border: 1px solid red;
 }
 
 div {
@@ -21,3 +39,13 @@ div {
   border: 1px solid white;
   float: left;
 }
+
+body,html {
+font-size: 10px;
+margin: 0;
+padding: 0;
+font-family: sans-serif;
+color: white;
+background-color: black;
+}
+*/
