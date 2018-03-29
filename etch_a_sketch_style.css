@@ -1,14 +1,27 @@
 body,html {
   font-family: sans-serif;
-  color: white;
-  background-color: black;
+  background-color: rgba(0,0,0,1);
 }
 
-#clearButton {
-  margin-top: 25px;
-  margin-left: 30%;
-  width: 150px;
+.flex-container-display {
+  display: flex;
+  align-items: center; /*justify-content: center; was not working for unknown reasons*/
+  flex-direction: column;
+  background-color: rgb(66, 134, 244);
+}
 
+.flex-container-display > .displayGridSize {
+  text-align: center;
+  color: black;
+  width: 150px;
+  padding: 5px;
+  margin: 5px;
+}
+
+.flex-container-display > #clearButton {
+  width: 150px;
+  padding: 5px;
+  margin: 5px;
 }
 
 #flex-container {
@@ -18,34 +31,8 @@ body,html {
   margin: 25px auto;
   width: 500px;
   height: 500px;
-  border: 1px solid red;
-
 }
 
 #flex-container > .grid {
   box-sizing: border-box;
   border: 1px solid white;
-/*
-#container {
-  margin: 0 auto;
-  width: 500px;
-  height: 500px;
-  margin-top: 50px;
-  border: 1px solid red;
-}
-
-div {
-  box-sizing: border-box;
-  border: 1px solid white;
-  float: left;
-}
-
-body,html {
-font-size: 10px;
-margin: 0;
-padding: 0;
-font-family: sans-serif;
-color: white;
-background-color: black;
-}
-*/

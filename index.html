@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
@@ -6,49 +6,78 @@
   <link rel="stylesheet" href="./etch_a_sketch_style.css" />
 </head>
 <body>
-  <button id='clearButton'>Clear Grid</button>
+  <div class="flex-container-display">
+    <div class="displayGridSize">16 x 16</div>
+    <button id="clearButton">Clear Grid</button>
+  </div>
   <div id="flex-container"></div>
 <script>
+//function update displayGridSize for user
+  var displaySize = function(x) {
+    let size = x;
+    document.getElementsByClassName('displayGridSize')[0].innerHTML = size + " x " + size;
+  }
+//function addEventListener to button
+  var clickButton = function() {
+    document.getElementById('clearButton').addEventListener('click', function() {
+      let x = prompt("Enter new grid size: ", "From 1 to 64");
+      if (x < 1 || x > 64 || isNaN(x)) {
+        deleteGrid();
+        createGrid(16);
+        displaySize(16);
+      } else if (!Number.isInteger(x)) {
+          deleteGrid();
+          createGrid(Math.round(x));
+          displaySize(Math.round(x));
+      } else {
+          deleteGrid();
+          createGrid(x);
+          displaySize(x);
+      }})
+  }
 //function gride size
-  var gridSize = function() {
-//    let size = prompt('Enter grid size: ');
-    return(10);
+  var askGridSize = function(x) {
+    let size = x;
+    return(x);
   }
-//function css grid box create` width attribute
-  var makeWidth = function(x) {
-    let width = (100 / x) + '%';
-    console.log("width: " + width);
-    return width;
-  }
-//function css grid box creat height attribute
-  var makeHeight = function(x) {
-    let height = (100 / x) + '%';
-    console.log("height: " + height);
-    return height;
-  }
-//function assign grid box height and width to array object
-  var assignGridSize = function() {
-    let x = document.getElementsByClassName('grid'); //nodeList
-    for(y = 0; y < x.length; y++) {
-      document.getElementsByClassName('grid')[y].style.width = makeWidth(gridSize());
-      document.getElementsByClassName('grid')[y].style.height = makeHeight(gridSize());
-    }
-  }
-//function create 16 by 16 div grid
+  //function create div grid
   var createGrid = function(x) {
     let size =  x * x;
     for(y = 0; y < size; y++) {
       var createDiv = document.createElement('div');
       createDiv.classList.add('grid');
       document.getElementById('flex-container').appendChild(createDiv);
-      console.log("created div class='grid'");
     }
+    assignGridSize(x);
+  }
+  //function assign grid box height and width to array object
+    var assignGridSize = function(y) {
+      let gridSize = y;
+      let getWidth = makeWidth(gridSize);
+      let getHeight = makeHeight(gridSize);
+      let x = document.getElementsByClassName('grid'); //nodeList
+      for(y = 0; y < x.length; y++) {
+        document.getElementsByClassName('grid')[y].style.width = getWidth;
+        document.getElementsByClassName('grid')[y].style.height = getHeight;
+      }
+      addGridListeners(gridSize);
+    }
+//function css grid box create` width attribute
+  var makeWidth = function(x) {
+    let width = (100 / x) + '%';
+    return width;
+  }
+//function css grid box creat height attribute
+  var makeHeight = function(x) {
+    let height = (100 / x) + '%';
+    return height;
   }
   //function add event listeners to all grid box divs
     var addGridListeners = function(x) {
       let size = x * x;
       for(y = 0; y < size; y++) {
         document.getElementsByClassName('grid')[y].dataset.gridIndex = y; //add nodeList index to div grid as a data attribute
+        document.getElementsByClassName('grid')[y].style.backgroundColor = '  black';
         document.getElementsByClassName('grid')[y].addEventListener('mouseover', function(e) {
           changeColor(e); //pass mouseover event details
       })}
@@ -56,16 +85,30 @@
   //function change grid color on mouseover
     var changeColor = function(e) {
       let c = e.currentTarget.dataset.gridIndex;
-      console.log(c + ' is the gridIndex');
-      document.getElementsByClassName('grid')[c].style.backgroundColor = "grey";
+      document.getElementsByClassName('grid')[c].style.backgroundColor = "rgb(66, 134, 244)";
+//    let z = e.currentTarget.style.opacity; //this doesn't current opacity
+//      console.log("opacity start: " + e.currentTarget.style.opacity);
+//    document.getElementsByClassName('grid')[c].style.opacity = z + 0.01;
+    }
+  //function deleteGrid
+    var deleteGrid = function() {
+      let x = document.getElementsByClassName('grid').length; //nodeList
+      let oldGrid = document.getElementById('flex-container'); //nodeList
+      for(let y = 0; y < x; y++) {
+        oldGrid.removeChild(oldGrid.childNodes[0]); //do not use [y] because DOM node index is dynamic and entire index will not be deleted
+      }
+    }
+  //function clearGridBackground backgroundColor
+    var clearGridBackground = function() {
+      let x = document.getElementsByClassName('grid'); //nodeList
+      console.log("grid was cleared - nodeList length = " + x.length);
+      for(let y = 0; y < x.length; y++) {
+        document.getElementsByClassName('grid')[y].backgroundColor = 'black';
+      }
     }
 //run the program
-  createGrid(gridSize());
-//  makeWidth(gridSize());
-//  makeHeight(gridSize());
-  assignGridSize();
-  addGridListeners(gridSize());
-//  changeColor();
+  clickButton();
+  createGrid(askGridSize(16));
 </script>
 </body>
 </html>
